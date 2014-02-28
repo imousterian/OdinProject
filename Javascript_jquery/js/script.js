@@ -34,10 +34,22 @@ $(document).ready(function()
 
             for(var j = 0; j < count * count; j++)
             {
+                var my = "d"+j.toString();
+                if($(this).attr('id') === my){
+                    var v = "#"+my;
+                    //$(v).css("background-color", "blue");
+                    $(v).css("background-color", generateRandomRGB());
+                    //$(this).fadeOut('slow');
+                    //$(this).fadeToggle(1000);
+                }
 
                 //$(this).attr('id').hover(function()
                 //{
-                    $(this).text($(this).attr('id')).css("background-color", "blue");
+                    //$(this).text($(this).attr('id')).css("background-color", "blue");
+
+                    //$(this.id).css("background-color", "blue");
+
+
                 //});
 
 
@@ -70,13 +82,22 @@ function test(){
     return count;
 }
 
+function generateRandomRGB(){
+    var r = Math.floor(Math.random() * 255) + 1;
+    var g = Math.floor(Math.random() * 255) + 1;
+    var b = Math.floor(Math.random() * 255) + 1;
+
+    return "rgb("+r.toString()+ "," + g.toString() + "," + b.toString() + ")"
+
+}
+
 function createDivs(size,ids){
 
     d = document.createElement('div');
     $(d).addClass("grid");
     //$(d).attr("id",id.toString());
     $divgrid = $(d);
-    var idToString = ids.toString();
+    var idToString = "d"+ids.toString();
     $divgrid.attr("id",idToString);
 
     $('.wrapper').append($divgrid);
