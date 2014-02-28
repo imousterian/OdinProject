@@ -36,3 +36,7 @@ form{
     padding: 0px;
     clear: left;
 }
+#add{
+    width: 80px;
+    height:30px;
+}
