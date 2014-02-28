@@ -1,0 +1,29 @@
+body{
+    background-color: red;
+}
+
+form{
+    width:900px;
+    margin: 0 auto;
+}
+
+.header{
+    height:40px;
+    width:960px;
+    margin: 0 auto;
+    background-color: green;
+    margin-bottom:15px;
+}
+
+.wrapper{
+    background-color: blue;
+    /*margin-left: 30px;
+    margin-right: 30px;*/
+
+    width:960px;
+    margin: 0 auto;
+    display: block;
+    border-collapse:collapse;
+    padding: 0px;
+    clear: both;
+}
