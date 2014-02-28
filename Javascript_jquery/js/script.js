@@ -3,54 +3,57 @@
 $(document).ready(function()
 {
     //$('button').click(function() {
-    //    var toAdd = $("input[name=message]").val();
+    //   var toAdd = $("input[name=message]").val();
     //    $('#messages').append("<p>"+toAdd+"</p>");
     //});
 
+    // Event binding using a convenience method
+    $( "#add" ).click(function( event ) {
+        alert( "Hello." );
+    });
+
     $head = $(".header");
     var count = test();
+    var dimensions = (960 - count*2) / count;
 
-    d=document.createElement('div');
-    $divgrid = $(d);
-    $('.wrapper').append($divgrid);
-    $divgrid.height('50px');
-    $divgrid.width('478px');
-    $divgrid.css("background-color","black");
-    $divgrid.css("border", "1px solid white");
-    $divgrid.css("display","inline-block");
-    $divgrid.css("float","left");
-
-
-    d=document.createElement('div');
-    $divgrid = $(d);
-    $('.wrapper').append($divgrid);
-    $divgrid.height('50px');
-    $divgrid.width('478px');
-    $divgrid.css("background-color","purple");
-    $divgrid.css("border", "1px solid white");
-    $divgrid.css("display","inline-block");
-    $divgrid.css("float","left");
-
-
-    d=document.createElement('div');
-    $divgrid = $(d);
-    $('.wrapper').append($divgrid);
-    $divgrid.height('50px');
-    $divgrid.width('478px');
-    $divgrid.css("background-color","purple");
-    $divgrid.css("border", "1px solid white");
-    $divgrid.css("display","inline-block");
-    $divgrid.css("float","left");
-
-
-
-
-    //$('.wrapper').append("<p>" + count + " I'm a paragraph!</p>")
-
+    for(var i = 0; i < count * count; i++)
+    {
+        createDivs(dimensions);
+    }
 
 });
 
 function test(){
-    var count = 16; // or an input from the form
+    var count = 8; // or an input from the form
     return count;
 }
+
+function createDivs(size){
+    d=document.createElement('div');
+    $divgrid = $(d);
+    $('.wrapper').append($divgrid);
+
+    $divgrid.css("background-color","purple");
+    $divgrid.css("border", "1px dotted white");
+    $divgrid.css("display","inline-block");
+    $divgrid.css("float","left");
+
+    var h = size.toString() + 'px';
+    //$divgrid.css("height", h);
+    $divgrid.height(h);
+    $divgrid.width(h);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

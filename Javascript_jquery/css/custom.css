@@ -1,5 +1,6 @@
 body{
     background-color: red;
+
 }
 
 form{
@@ -15,6 +16,14 @@ form{
     margin-bottom:15px;
 }
 
+.footer{
+    height:40px;
+    background-color: orange;
+
+    float:left;
+    clear:left;
+}
+
 .wrapper{
     background-color: blue;
     /*margin-left: 30px;
@@ -25,5 +34,5 @@ form{
     display: block;
     border-collapse:collapse;
     padding: 0px;
-    clear: both;
+    clear: left;
 }
