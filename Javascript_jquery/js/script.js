@@ -1,86 +1,58 @@
-//var dims = new Array();
+
 $(document).ready(function()
 {
-    //$('button').click(function() {
-    //   var toAdd = $("input[name=message]").val();
-    //    $('#messages').append("<p>"+toAdd+"</p>");
-    //});
 
-    // Event binding using a convenience method
+    $("#add").click(function(){
 
-    $( "#add" ).click(function( event )
-    {
-        //location.reload(false);
-        //$(document).removeClass(".grid");
+        $(".grid").remove();
 
-
-        var input = prompt("Please select how many grids to display, \n but no more than 64!");
-        $head = $(".header");
-        var count = input;//test();
+        var count = prompt("Please select how many grids to display, \n but no more than 64!");
         var dimensions = (960 - count*2) / count;
 
+        for(var i = 0; i < count * count; i++){
+            createDivs(dimensions);
+        }
 
+        $('.grid').hover(function(){
+            $(this).css("background-color", generateRandomRGB());
+        });
+
+    });
+
+});
+
+function display()
+{
+        var input = prompt("Please select how many grids to display, \n but no more than 64!");
+        $head = $(".header");
+        var count = input;
+        var dimensions = (960 - count*2) / count;
 
         for(var i = 0; i < count * count; i++)
         {
-           // $grd = createDivs(dimensions);
-            //$grd.css("background-color", "red");
-            //$dims[i] =
-            createDivs(dimensions,i);
+            createDivs(dimensions);
         }
 
         $('.grid').hover(function()
         {
+            //$(this).css("background-color", generateRandomRGB());
 
             for(var j = 0; j < count * count; j++)
             {
                 var my = "d"+j.toString();
-                if($(this).attr('id') === my){
+                if($(this).attr('id') === my)
+                {
                     var v = "#"+my;
-                    //$(v).css("background-color", "blue");
-                    $(v).css("background-color", generateRandomRGB());
+                //    $(v).css("background-color", generateRandomRGB());
                     //$(this).fadeOut('slow');
-                    //$(this).fadeToggle(1000);
+                    //$(this).fadeToggle(800);
+                    //$(v).css("background-color", "black");
                 }
-
-                //$(this).attr('id').hover(function()
-                //{
-                    //$(this).text($(this).attr('id')).css("background-color", "blue");
-
-                    //$(this.id).css("background-color", "blue");
-
-
-                //});
-
-
             }
 
         });
-
-
-
-
-
-    });
-
-       $('#1').hover(function(){
-    //     for (var i = 0; i < dims.length, i++){
-    //         $d = dims[i];
-             $('#1').css("background-color", "blue");
-    //     }
-
-     });
-
-
-
-
-
-});
-
-function test(){
-    var count = 8; // or an input from the form
-    return count;
 }
+
 
 function generateRandomRGB(){
     var r = Math.floor(Math.random() * 255) + 1;
@@ -91,30 +63,21 @@ function generateRandomRGB(){
 
 }
 
-function createDivs(size,ids){
+function createDivs(size){
 
     d = document.createElement('div');
     $(d).addClass("grid");
-    //$(d).attr("id",id.toString());
     $divgrid = $(d);
-    var idToString = "d"+ids.toString();
-    $divgrid.attr("id",idToString);
-
-    $('.wrapper').append($divgrid);
-
-    $divgrid.css("background-color","purple");
+    $divgrid.css("background-color","black");
     $divgrid.css("border", "1px dotted white");
     $divgrid.css("display","inline-block");
     $divgrid.css("float","left");
 
     var h = size.toString() + 'px';
-    //$divgrid.css("height", h);
     $divgrid.height(h);
     $divgrid.width(h);
 
-    //return $divgrid;
-
-    //return $divgrid;
+    $('.wrapper').append($divgrid);
 }
 
 
