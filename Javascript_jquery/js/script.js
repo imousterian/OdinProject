@@ -13,10 +13,15 @@ $(document).ready(function()
             createDivs(dimensions,i);
         }
 
-        $('.grid').hover(function(){
-            //$(this).css("background-color", generateRandomRGB());
-            $(this).text($(this).attr('id')).css("background-color", "red");
+        $('.grid').mouseenter(function(){
+            $(this).css("background-color", generateRandomRGB());
+            $(this).fadeTo(500,0);
+            //$(this).text($(this).attr('id')).css("background-color", "red");
 
+        });
+
+        $('.grid').mouseleave(function(){
+            $(this).fadeTo(500,1);
         });
 
     }); // end of #add_left butoon
@@ -24,6 +29,8 @@ $(document).ready(function()
 
     $("#add_right").click(function()
     {
+        alert();
+
         $(".grid").remove();
         var count = 30;
         var dimensions = (960 - count*2) / count;
@@ -42,184 +49,270 @@ $(document).ready(function()
         $('.grid').mouseenter(function()
         {
             //$(this).css("background-color", generateRandomRGB());
-            $(this).text($(this).attr('id')).css("background-color", "#FCFCFC");
+            //$(this).text($(this).attr('id')).css("background-color", "#FCFCFC");
+            colorDaleks($(this),arr,count);
 
-            for (var i = 0; i < arr.length; i++)
-            {
+            //fadeToggleForever($('.colored'));
 
-                var my = "d" + arr[i].toString();
-                //var myColor = $(this).css("background-color");
-                var blockColor = "#FFCC00"
+            var data = $('.colored').length;
+            //shoot( $(this), data);
 
-                if($(this).attr('id') === my)
-                {
-                    $(this).addClass("colored");
-                    var v = "#"+my;
-                    $(v).css("background-color", "#000080");
+
+        }); // end of hover
+
+        $('.grid').mouseover(function(){
+            var data = $('.colored').length;
+            //console.log(data);
+
+            $(this).show(function(){
+                shoot( $(this), data);
+            });
+
+
+        }); // end of grid.mouseover event
+
+    }); // end of #add_right.click() event
+
+    $("#test").click(function()
+    {
+        //console.log($('.colored').length);
+        $(".grid").remove();
+        var count = 30;
+
+        var dimensions = (960 - count*2) / count;
+
+        for(var i = 1; i <= count * count; i++){
+            createDivs(dimensions,i);
+        }
+
+        var lineToBegin = 3*count+5;
+
+
+        var arr = constructDalekArray(lineToBegin,count);
+        $('.grid').show(function(){
+            colorDaleks($(this), arr, count);
+
+        });
+
+        //$('.colored').effect("pulsate");
+        //fadeToggleForever($('.colored'));
+
+    });
+
+
+
+}); // end of document.ready()
+
+function returnBulletDivs(){
+    var arr = [];
+    for(var i = 386; i <= 390; i++){
+        var id = "#d" + i;
+        arr.push(id);
+    }
+
+    return arr;
+
+}
+
+function shoot($e, data)
+{
+    var arr = returnBulletDivs();
+    //console.log(data);
+
+    if(data >= 356)
+    {
+
+        var count = 0;
+
+        for (var i = 0; i < arr.length; i++){
+            //$(arr[i]).css("background-color", "red").show().delay(500).hide(0);
+            //for(var j = i+1; j < arr.length; j++){
+            //    $(arr[j]).css("background-color", "red").show().delay(500).hide(0);
+
+
+            //}
+        }
+
+            //$(el1).show();
+
+            //$(el1).fadeToggle({ duration: 300, complete: function(){ shoot( $(el1), data) }});
+
+            //$(el2).effect("pulsate", {duration: 1000, complete: function() { shoot ($(el2),data)}});
+
+            //$(el2).fadeToggle({ duration: 300, complete: function(){ shoot($(el2), data) }});
+
+
+        for (var i = 0; i < arr.length; i++)
+        {
+            if(i % 2 === 0){
+                var those = arr[i];
+                $(those).css("background-color", "red");
+            //$(other).css("background-color", "red");
+
+            //$(those).hide();
+            $(those).effect("pulsate", {duration: 2000, complete: function() { shoot ($(those),data)}});
+
+            $(those).fadeToggle({ duration: 1000, complete: function(){ shoot($(those), data) }});
+            }else{
+                var those = arr[i];
+                $(those).css("background-color", "red");
+            //$(other).css("background-color", "red");
+
+            //$(those).hide();
+            $(those).effect("pulsate", {duration: 4000, complete: function() { shoot ($(those),data)}});
+
+            $(those).fadeToggle({ duration: 2000, complete: function(){ shoot($(those), data) }});
+            }
+
+            var other = arr[i+1];
+
+
+
+            //$(those).show();
+        }
+
+    }
+
+    //$e.fadeToggle({ duration: 2600, complete: function(){ shoot($e) }
+    //    });
+}
+
+
+function colorDaleks($e, arr,count)
+{
+    //$e.text($e.attr('id')).css("background-color", "#FCFCFC");
+    $e.css("background-color", "#F8F8F8");
+    //$e.css("background-color", "#E8E8E8");
+
+    for (var i = 0; i < arr.length; i++)
+    {
+
+        var my = "d" + arr[i].toString();
+        var blockColor = "#FFCC00";
+
+        if($e.attr('id') === my)
+        {
+            $e.addClass("colored");
+            var v = "#"+my;
+            $(v).css("background-color", "#000080");
 
                     //console.log("done " + stuff);
 
-                    var beep = 1;
+            var beep = 1;
                     //var initial = (count - 2) * 15;//420; start coloring the body at the end of line 14
-                    var initial = count * 14; //start coloring the body at the end of line 14
+            var initial = count * 14; //start coloring the body at the end of line 14
 
 
-                    while(beep <= 13)
-                    {
+            while(beep <= 13)
+            {
                         //var x = beep + 30;
-                        $(v).css("background-color", "#red");
+                //$(v).css("background-color", "#red");
 
-                        if(beep % 2 != 0){ // odd line
-                            initial = initial + count;
-                            var d = initial + count;//*beep;
-                            if(arr[i] >= initial & (arr[i] <= d))
-                            {
+                if(beep % 2 != 0)
+                { // odd line
+                    initial = initial + count;
+                    var d = initial + count;//*beep;
+
+                    if(arr[i] >= initial & (arr[i] <= d))
+                        {
                                 //console.log(arr[i] + " " +d);
-                                if(arr[i] % 2 != 0){
+                            if(arr[i] % 2 != 0){
                                     $(v).css("background-color", blockColor);
                                 }
-                            }
-                        }else{
-                            initial = initial + count;
-                            var d = initial + count;// * beep;
-                            if(arr[i] >= initial & (arr[i] <= d))
-                            {
-                                //console.log(arr[i] + " " +d);
-                                if(arr[i] % 2 === 0){
-                                    $(v).css("background-color", blockColor);
-                                }
-                            }
                         }
+                }else{
+                        initial = initial + count;
+                        var d = initial + count;// * beep;
+                        if(arr[i] >= initial & (arr[i] <= d))
+                        {
+                                //console.log(arr[i] + " " +d);
+                            if(arr[i] % 2 === 0){
+                                    $(v).css("background-color", blockColor);
+                                }
+                        }
+                    }
 
-                        beep += 1;
+                beep += 1;
 
-                    } /// end of while loop
+            } /// end of while loop
 
                     // add color to lines 8 and 10
                      //if((arr[i] > 272 & arr[i] < 283) || (arr[i] >= 212 & arr[i] < 223))
                      // add color to line 8
-                     if (count % 3 != 0){
+            if (count % 3 != 0)
+            {
 
-                        if(arr[i] >= (count * 7) + 3 & arr[i] < (count * 7) + 2 + 10)
-                        {
+                if(arr[i] >= (count * 7) + 3 & arr[i] < (count * 7) + 2 + 10)
+                {
 
-                            if (arr[i+1] % 3 != 0 )
-                            {
-                                $(v).css("background-color", "green");
+                    if (arr[i+1] % 3 != 0 )
+                    {
+                        $(v).css("background-color", blockColor);
                              //console.log("test");
-                            }
-                        }
+                    }
+                }
 
-                     }else{
+            }else{
 
-                        if(arr[i] >= (count * 7) + 2 & arr[i] < (count * 7) + 2 + 10)
+                    if(arr[i] >= (count * 7) + 2 & arr[i] < (count * 7) + 2 + 10)
+                    {
+
+                        if (arr[i] % 3 != 0 )
                         {
-
-                            if (arr[i] % 3 != 0 )
-                            {
-                                $(v).css("background-color", "green");
+                            $(v).css("background-color", blockColor);
                              //console.log("test");
-                            }
                         }
+                    }
 
-                     }
+                 }
 
 
                      // add color to line 10
-                     if(arr[i] >= (count * 9) + 2 & arr[i] < (count * 9) + 2 + 10)
-                     {
-                         if (arr[i] % 3 != 0 )
-                         {
-                             $(v).css("background-color", "green");
-                             //console.log("test");
-                         }
-                     }
-
-                     if(arr[i] > 332 & arr[i] <=342){
-                        if(arr[i] % 2 != 0){
-                            //$(v).css("background-color", blockColor);
-                        }
-
-                     }
-
-                     if(arr[i] >= 361 & arr[i] <=372){
-                        if(arr[i] % 2 != 0){
-                            $(v).css("background-color", blockColor);
-                        }
-
-                     }
-
-                     if(arr[i] >= 391 & arr[i] <=402){
-                        if(arr[i] % 2 != 0){
-                            $(v).css("background-color", blockColor);
-                        }
-
-                     }
-
-                }// end of if condition
-
-
-            }  // end for for loop
-
-
-
-
-                // var data = $('.colored').length;
-
-                // $('.bullet').bind("main", function(event, data) {
-                //     //alert(data);
-
-                //     console.log(data);
-
-                //     }); // end of test
-
-                // $('.bullet').trigger("main", data);
-
-        }); // end of hover
-
-        var data = $('.colored').length;
-            // console.log("bullets " + $('.bullet').length);
-            if (data >= 6){ //356
-                //console.log(data);
-                for (var f = 386; f <= 390; f++) //386
+            if(arr[i] >= (count * 9) + 2 & arr[i] < (count * 9) + 2 + 10)
+            {
+                if (arr[i] % 3 != 0 )
                 {
-
-                    var my2 = "d" + f;//arr[f].toString();
-                    //console.log(my2 + " " + f + " " + arr[f].toString());
-
-                    if($(this).attr('id') === my2)
-                    {
-                        //$(this).addClass("colored");
-                        var v2 = "#"+my2;
-                        //console.log(v2 + " " + data);
-                        $(v2).css("background-color", "red");
-                        $(v2).effect("pulsate");
-            //        // console.log(data);
-
-                    }
+                    $(v).css("background-color", blockColor);
+                             //console.log("test");
                 }
             }
 
+            if(arr[i] > 332 & arr[i] <=342){
+                if(arr[i] % 2 != 0){
+                            //$(v).css("background-color", blockColor);
+                    }
+
+                }
+
+            if(arr[i] >= 361 & arr[i] <=372){
+                if(arr[i] % 2 != 0){
+                        $(v).css("background-color", blockColor);
+                    }
+
+                }
+
+            if(arr[i] >= 391 & arr[i] <=402){
+                if(arr[i] % 2 != 0){
+                    $(v).css("background-color", blockColor);
+                    }
+
+                }
+
+        }// end of if condition
+
+    } // end of for loop
+
+    //return $e.length;
+}
 
 
-        // $('.grid').mouseenter(function(){
-        //     var data = $('.colored').length;
-        //     if (data >= 6){ //356
-        //             $('.bullet').css("background-color", "red");
-        //             $('#bull').toggle("pulsate");
-        //             //console.log(data);
-
-        //     }
-
-        //   //  console.log(data);
-        // });
-
-
-
-    }); // end of #add_right()
-
-
-}); // end of document.ready()
+function fadeToggleForever ($e) {
+    $e.fadeToggle({
+        duration: 2600,
+        // start another fadeToggle when this one completes
+        complete: function () { fadeToggleForever($e) }
+    });
+}
 
 
 function display()
@@ -260,9 +353,9 @@ function display()
 
 
 function generateRandomRGB(){
-    var r = Math.floor(Math.random() * 255) + 1;
-    var g = Math.floor(Math.random() * 255) + 1;
-    var b = Math.floor(Math.random() * 255) + 1;
+    var r = 1;//Math.floor(Math.random() * 255) + 1;
+    var g = Math.floor(Math.random() * 75) + 1;
+    var b = 1;//Math.floor(Math.random() * 255) + 1;
 
     return "rgb("+r.toString()+ "," + g.toString() + "," + b.toString() + ")"
 
@@ -275,7 +368,6 @@ function createDivs(size,i){
     $divgrid = $(d);
     var g = "d" + i.toString();
     $divgrid.attr('id',g);
-    //$divgrid.css("background-color","grey");
     $divgrid.css("border", "1px dotted grey");
     $divgrid.css("display","inline-block");
     $divgrid.css("float","left");
@@ -350,7 +442,7 @@ function constructDalekArray(beginning,count){
 
         h++;
     }
-
+    // lines 15 through 19
     var h1 = 15;
     var muu2 = [];
     while(h1 < 19){
@@ -361,6 +453,8 @@ function constructDalekArray(beginning,count){
 
         h1++;
     }
+
+    // lines 19 through 23
 
     h1 = 19;
     var muu3 = [];
@@ -373,6 +467,8 @@ function constructDalekArray(beginning,count){
         h1++;
     }
 
+    // lines 23 through 25
+
     h1 = 23;
     var muu4 = [];
     while(h1 < 25){
@@ -382,6 +478,8 @@ function constructDalekArray(beginning,count){
         muu4 = $.merge($.merge(muu4,r1),line22To25);
         h1++;
     }
+
+    // lines 25 through 27
 
     h1 = 25;
     var muu5 = [];
@@ -394,7 +492,8 @@ function constructDalekArray(beginning,count){
         h1++;
     }
 
-    return whole.concat(line1,line2,line3,line4,line5,line6,line7,line8,line9,line10,
+    return whole.concat(line1,line2,line3,line4,line5,line6,
+        line7,line8,line9,line10,
         line11,line12,muu,muu2,muu3,muu4,muu5,
         linePlunger1,linePlunger2);
 
