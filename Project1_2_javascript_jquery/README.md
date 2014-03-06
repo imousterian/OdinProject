@@ -11,3 +11,5 @@ incomplete, or becomes partially erased after having been moved behind the bound
 which may result in accidental painting over the existing dalek.
 
 These issues will be addressed and fixed in the future.
+
+Tested in Chrome, Safari 7, and Firefox.

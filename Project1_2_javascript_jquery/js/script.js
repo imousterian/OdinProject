@@ -42,10 +42,10 @@ $(document).ready(function()
 
         $(".grid").remove();
 
-        var count = prompt("Please select how many grids to display, but \n (for better display purposes) no more than 64!");
-        var dimensions = (960 - count*2) / count;
+        var count1 = prompt("Please select how many grids to display, but \n (for better display purposes) no more than 64!");
+        var dimensions = (960 - count1*2) / count1;
 
-        for(var i = 1; i <= count * count; i++){
+        for(var i = 1; i <= count1 * count1; i++){
             createDivs(dimensions,i);
         }
 
@@ -73,7 +73,9 @@ $(document).ready(function()
 
         $( "#dialog").on( "dialogclose", function( event, ui )
         {
-            var count = setCount();
+            $(".grid").remove();
+
+            var count =  setCount();
 
             // calculate the size of the cell based on the number of grids to be displayed
             // and create the necessary number of divs
@@ -123,8 +125,6 @@ $(document).ready(function()
     {
         var count = setCount();
 
-        done = true;
-
         switch(parseInt(key.which,10)) {
             // Left arrow key pressed
             case 37:
@@ -165,6 +165,7 @@ $(document).ready(function()
 
 
 function setCount(){
+
     return 50;
 }
 
