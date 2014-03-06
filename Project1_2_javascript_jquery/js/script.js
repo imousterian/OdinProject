@@ -3,6 +3,16 @@
 The dalek project was inspired by http://cronodon.com/Programming/c64_programming.html,
 and the image is mimicked after http://cronodon.com/images/dalek_sprite_1a.jpg
 
+
+Note: current version does not account for grid boundaries when the dalek image is being moved around.
+This means that if the dalek image (or its portions) goes behind the boundaries, it will disappear.
+The reason is that it is not a real image but a sequence of cells being repainted at each iteration.
+
+Additional note: the 'hover' function is not disabled when the image is being moved around, which
+may result in accidental painting over the existing dalek.
+
+These issues will be addressed and fixed in the future.
+
 */
 
 
@@ -16,16 +26,15 @@ $(document).ready(function()
             width: 500,
             show: {
                 effect: "blind",
-                duration: 800
+                duration: 500
             },
             hide: {
                 effect: "explode",
-                duration: 800
+                duration: 500
             }
 
         });
     });
-
 
 
     $("#add_left").click(function(){
@@ -49,13 +58,13 @@ $(document).ready(function()
             $(this).fadeTo(500,1);
         });
 
-    }); // end of #add_left butoon
+    }); // end of #add_left button
+
 
 
     $("#add_right").click(function()
     {
         $('#dialog').dialog("open");
-
 
         // once the dialog closes, perform drawing
 
@@ -79,55 +88,44 @@ $(document).ready(function()
             // read in dalek data from the file,
             // create a new matrix based on the number of divs and add dalek data into this matrix
 
-            var dalekData = readDalekData();
-
-            var daleks = [];
-
-            for (var b = 0; b < count; b++){
-                daleks[b] = [];
-                for(var bb = 0; bb < count; bb++){
-                    daleks[b][bb] = 0;
-                    if (b < 25 & bb < 25){
-                        daleks[b][bb] = dalekData[b][bb];
-                    }
-                }
-            }
+            var daleks = readDalekData();
 
             // start of the hover function
 
-            $('.grid').hover(function()
+            $('.grid').mouseenter(function()
             {
+                if($('.colored').length <= 327){
                 // extract col and row value from the div matrix
                 // and compare to col and row value of the dalek matrix
                 // if equal, update the div matrix accordingly and assign each div a color code
 
-                var cols = $(this).data("value").col;
-                var rows = $(this).data("value").row;
+                    var cols = $(this).data("value").col;
+                    var rows = $(this).data("value").row;
 
-                for (var j = 0; j < count; j++){
-                    for (var c = 0; c < count; c++){
+                    var data1 = daleks[cols][rows];
 
-                        var data1 = daleks[j][c];
+                    $(this).data("value", { colour: data1, col: cols, row: rows });
 
-                        if (j === cols & c === rows){
-                            $(this).data("value", { colour: data1, col: j, row: c });
-                        }
-                    }
+                    // color each div based on its color value
+
+                    colorDalek($(this));
+
                 }
 
-                // color each div based on its color value
-
-                colorDalek($(this));
-
             }); // end of hover
+
+
 
         }); // end of close dialog event
 
     }); // end of add_right click event
 
+
     $(document).keydown(function(key)
     {
         var count = setCount();
+
+        done = true;
 
         switch(parseInt(key.which,10)) {
             // Left arrow key pressed
@@ -166,6 +164,7 @@ $(document).ready(function()
     }); // end of document of keydown function
 
 });
+
 
 function setCount(){
     return 50;
@@ -239,6 +238,7 @@ function recolorMovingDalek(arr,count,x,y){
 
     $('.grid').each(function(index,element)
     {
+        $(this).removeClass('colored');
         var cols = $(element).data("value").col;
         var rows = $(element).data("value").row;
         var colors = $(element).data("value").colour;
@@ -256,7 +256,6 @@ function recolorMovingDalek(arr,count,x,y){
         }
         colorDalek($(element));
     });
-
 }
 
 function colorDalek($e){
@@ -270,9 +269,15 @@ function colorDalek($e){
         $e.addClass("colored");
     }
     else if ($e.data("value").colour === 3){
+        //$e.css("background-color", "#F8F8F8");
+        //$e.effect("pulsate");
         $e.css("background-color", "");
-        $e.addClass("colored");
-    }else {
+        //$e.addClass("colored");
+    }else if ($e.data("value").colour === 4){
+        $e.effect("pulsate");
+        $e.css("background-color", "");
+    }
+    else {
         //$e.css("background-color", "#F8F8F8");
         $e.css("background-color", "");
     }
