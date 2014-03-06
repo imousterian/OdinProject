@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Awesome Grids</title>
 
+    <link type="text/css" href="css/jquery-ui.css" rel="stylesheet" >
+
     <link type="text/css" href="css/custom.css" rel="stylesheet" >
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,16 +20,21 @@
   </head>
 
   <body>
+        <div id="dialog" title="Info">
+            <p> There is a picture hiding here! <br>
+                (Hint: look in the upper left quandrant). <br>
+                Then use left, right, up and down arrows to move it around!
+            </p>
+        </div>
+
         <div class="header">
             <div class="buttonholder">
-
                     <button id="add_left" >Click me!</button>
-                    <button id="add_right" >Surprise!</button>
-                    <button id="test" >test</button>
-
+                    <button id="add_right" >Click me too!</button>
             </div>
 
         </div>
+
 
         <div class="wrapper">
             <div class="grid"></div>
@@ -45,10 +53,7 @@
 
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 
-    <!--script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script-->
-
-    <!--script type="text/javascript" src="js/script.js"></script-->
-    <script type="text/javascript" src="js/script2.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
     <script type="text/javascript" src="js/data.js"></script>
 
 

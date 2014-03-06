@@ -17,11 +17,9 @@ body{
 }
 
 .buttonholder{
-    /*background-color: red;*/
     display:table-cell;
     vertical-align: middle;
     height:40px;
-
 }
 
 .footer{
@@ -42,14 +40,28 @@ body{
 }
 
 button{
-    width: 80px;
-    height:40px;
+    width: 120px;
+    height:50px;
     border-radius:5px;
 }
 #add_right{
     margin-left: 10%;
 }
 
+.ui-widget{
+    font-size: 0.8em;
+
+}
+
+.ui-widget-header{
+    background: orange;
+}
+.ui-widget{
+    border: orange;
+}
+.ui-widget-content{
+    border: 2px solid orange;
+}
 
 
 
