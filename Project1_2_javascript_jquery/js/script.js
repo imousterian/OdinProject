@@ -5,11 +5,12 @@ and the image is mimicked after http://cronodon.com/images/dalek_sprite_1a.jpg
 
 
 Note: current version does not account for grid boundaries when the dalek image is being moved around.
-This means that if the dalek image (or its portions) goes behind the boundaries, it will disappear.
+This means that if the dalek image (or its portions) goes behind the boundaries, it will be erased partially or completely.
 The reason is that it is not a real image but a sequence of cells being repainted at each iteration.
 
-Additional note: the 'hover' function is not disabled when the image is being moved around, which
-may result in accidental painting over the existing dalek.
+Additional note: the 'hover' function is disabled when the complete dalek has been drawn, but if the drawing is
+incomeplete, or becomes partially erased after having been moved behind the boundary, it becomes enabled again,
+which may result in accidental painting over the existing dalek.
 
 These issues will be addressed and fixed in the future.
 
@@ -64,6 +65,8 @@ $(document).ready(function()
 
     $("#add_right").click(function()
     {
+        $(".grid").remove();
+
         $('#dialog').dialog("open");
 
         // once the dialog closes, perform drawing
@@ -71,8 +74,6 @@ $(document).ready(function()
         $( "#dialog").on( "dialogclose", function( event, ui )
         {
             var count = setCount();
-
-            $(".grid").remove();
 
             // calculate the size of the cell based on the number of grids to be displayed
             // and create the necessary number of divs
@@ -85,8 +86,7 @@ $(document).ready(function()
                 }
             }
 
-            // read in dalek data from the file,
-            // create a new matrix based on the number of divs and add dalek data into this matrix
+            // read in dalek data from the file
 
             var daleks = readDalekData();
 
@@ -113,8 +113,6 @@ $(document).ready(function()
                 }
 
             }); // end of hover
-
-
 
         }); // end of close dialog event
 
@@ -270,9 +268,7 @@ function colorDalek($e){
     }
     else if ($e.data("value").colour === 3){
         //$e.css("background-color", "#F8F8F8");
-        //$e.effect("pulsate");
         $e.css("background-color", "");
-        //$e.addClass("colored");
     }else if ($e.data("value").colour === 4){
         $e.effect("pulsate");
         $e.css("background-color", "");
@@ -302,6 +298,8 @@ function createDivs(size,i,j){
 }
 
 function generateRandomRGB(){
+    // generate random colors in green shades
+
     var r = 1;//Math.floor(Math.random() * 255) + 1;
     var g = Math.floor(Math.random() * 75) + 1;
     var b = 1;//Math.floor(Math.random() * 255) + 1;
