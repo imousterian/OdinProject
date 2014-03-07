@@ -19,9 +19,32 @@ These issues will be addressed and fixed in the future.
 
 $(document).ready(function()
 {
-    // initiate a dialog function
+    // initiate dialog functions
 
-    $(function(){
+    $(function() {
+    $("#dialog-form").dialog({
+        autoOpen: false,
+        title: "Enter a number between 1 and 64",
+        width: 325,
+        modal: true,
+        show: {
+                effect: "blind",
+                duration: 500
+            },
+            hide: {
+                effect: "explode",
+                duration: 500
+            },
+        buttons: {
+            Ok: function() {
+                $(this).dialog("close");
+            }
+        }
+        });
+    });
+
+    $(function()
+    {
         $('#dialog').dialog({
             autoOpen: false,
             width: 500,
@@ -38,25 +61,40 @@ $(document).ready(function()
     });
 
 
+
+
     $("#add_left").click(function(){
 
         $(".grid").remove();
 
-        var count1 = prompt("Please select how many grids to display, but \n (for better display purposes) no more than 64!");
-        var dimensions = (960 - count1*2) / count1;
+        $("#num1").val("");
 
-        for(var i = 1; i <= count1 * count1; i++){
-            createDivs(dimensions,i);
-        }
+        $("#dialog-form").dialog("open");
 
-        $('.grid').mouseenter(function(){
-            $(this).css("background-color", generateRandomRGB());
-            $(this).fadeTo(500,0);
 
-        });
+        // on closed dialog, perform drawings
 
-        $('.grid').mouseleave(function(){
-            $(this).fadeTo(500,1);
+        $( "#dialog-form").on( "dialogclose", function( event, ui )
+        {
+            $(".grid").remove();
+
+            var count1 = $("#num1").val();
+
+            var dimensions = (960 - count1*2) / count1;
+
+            for(var i = 1; i <= count1 * count1; i++){
+                createDivs(dimensions,i);
+            }
+
+            $('.grid').mouseenter(function(){
+                $(this).css("background-color", generateRandomRGB());
+                $(this).fadeTo(500,0);
+
+            });
+
+            $('.grid').mouseleave(function(){
+                $(this).fadeTo(500,1);
+            });
         });
 
     }); // end of #add_left button
@@ -166,7 +204,7 @@ $(document).ready(function()
 
 function setCount(){
 
-    return 50;
+    return 35;
 }
 
 function getPreviousDalekLocation(count){
