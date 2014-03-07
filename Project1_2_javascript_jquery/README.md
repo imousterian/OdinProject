@@ -12,4 +12,4 @@ which may result in accidental painting over the existing dalek.
 
 These issues will be addressed and fixed in the future.
 
-Tested in Chrome, Safari 7, and Firefox.
+Tested and works in Chrome and Safari 7. Daleks do not work in Firefox.
