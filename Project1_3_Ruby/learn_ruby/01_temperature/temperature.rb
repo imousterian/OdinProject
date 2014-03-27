@@ -1,3 +1,4 @@
+# to farenheit
 def ftoc(num)
     if num == 32
         0
@@ -7,6 +8,7 @@ def ftoc(num)
 
 end
 
+# to celcius
 def ctof(num)
 
     if num == 0
