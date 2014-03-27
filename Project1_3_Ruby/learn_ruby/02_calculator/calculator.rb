@@ -15,7 +15,7 @@ def sum(arr)
 end
 
 def multiply(arr)
-    result = 1
+    result = 15
     arr.each do |item|
         result = result * item
     end
