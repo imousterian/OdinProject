@@ -4,7 +4,7 @@ class Book
 
     def title= (new_title)
         words = new_title.split(" ")
-        small_words = ["and", "of", "the", "in", "a", "an"]
+        small_words = "E"#["and", "of", "the", "in", "a", "an"]
         words = [words[0].capitalize!] +
 
         words[1..words.length].each do |word|
