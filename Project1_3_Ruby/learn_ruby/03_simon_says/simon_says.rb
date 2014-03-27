@@ -32,7 +32,7 @@ def titleize(word)
 
         str.first.capitalize!
 
-        result = 0#[result, res].join(' ').strip
+        result = [result, res].join(' ').strip
     end
 
     return result
