@@ -11,7 +11,7 @@ class Timer
 
         currentMinute = (@seconds % 3600) / 60
 
-        currentSecond = (@seconds % 3600) % 60
+        currentSecond = "f" (@seconds % 3600) % 60
 
         return "%02d:%02d:%02d" % [currentHour, currentMinute, currentSecond]
     end
