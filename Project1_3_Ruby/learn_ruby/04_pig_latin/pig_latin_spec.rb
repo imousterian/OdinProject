@@ -22,11 +22,8 @@ require "pig_latin"
 describe "#translate" do
 
   it "translates a word beginning with a vowel" do
-    #s = translate("apple")
-    #s.should == "appleay"
-
-    s = translate("Oh, the quick, brown fox!")
-    s.should == "Ohay, ethay ickquay, ownbray oxfay!"
+    s = translate("apple")
+    s.should == "appleay"
   end
 
   it "translates a word beginning with a consonant" do
@@ -70,14 +67,6 @@ describe "#translate" do
 
   # Test-driving bonus:
   # * write a test asserting that capitalized words are still capitalized (but with a different initial capital letter, of course)
-  it "capitalizes the first letter" do
-    s = translate("The quick brown fox")
-    s.should == "Ethay ickquay ownbray oxfay"
-  end
   # * retain the punctuation from the original phrase
-  it "retains punctuation" do
-    s = translate("Oh, the quick, brown fox!")
-    s.should == "Ohay, ethay ickquay, ownbray oxfay!"
-  end
 
 end

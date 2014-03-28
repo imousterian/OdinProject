@@ -1,58 +1,41 @@
 
 
 def translate(str)
-    vowels = "aeiouq"
-    punctuations = ",.!" #[",", "!", "."]
+
+    vowels = ["a", "e", "i", "o", "u", "y"]
+
     words = str.split(" ")
-    finalResult = ""
+
+    result = ""
 
     words.each do |word|
-        result = ""
-        some = 0
 
-        if (punctuations.index(word[word.length-1]) == nil)
-            some = 0
+        counter = 0
+
+        if (vowels.include? word[0])
+            counter += 0
+        elsif word[0,2] == "qu"
+            counter += 2
         else
-            some = 2
-        end
+            if (vowels.include? word[1])
+                counter += 1
 
-
-
-        if(vowels.index(word[0]) != nil)
-            result = "test" #word[0,word.length-some] + "ay"
-        else
-            if (vowels.index(word[1]) != nil)
-                result = "test2"#word[1,word.length] + word[0] + "ay"
-
-                if(word[1,2] == "qu")
-                    result = "test3" #word[3,word.length] + word[0] + "quay"
+            elsif(vowels.include? word[2])
+                if (word[1,2] == "qu")
+                    counter += 1
                 end
-
-            elsif (vowels.index(word[2]) != nil)
-                result = "test4" #word[2,word.length] + word[0,2] + "ay"
+                counter += 2
             else
-                result = "tset5" #word[3,word.length] + word[0,3] + "ay"
+                counter += 3
             end
         end
 
-        if(word[0,2] == "qu")
-           result = word[2,word.length] + "qu" + "ay"
-        end
 
-        finalResult = [finalResult,result].join(" ").strip
+        result = [result, word[counter,word.length] + word[0,counter] + "ay"].join(' ').strip
 
     end
 
-    finalResult.downcase!
-
-    if(words[0][0,1] == words[0][0,1].upcase)
-        finalResult.capitalize!
-    end
-
-    return finalResult
+    result
 
 end
 
-def punctuation? punctuation
-    punctuations.include? punctuation
-end
