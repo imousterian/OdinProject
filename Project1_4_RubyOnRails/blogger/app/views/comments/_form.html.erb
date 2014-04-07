@@ -2,14 +2,14 @@
 
 <%= form_for [ @article, @comment ] do |f| %>
   <p>
-    <%= f.label :author_name, "Your Name" %><br/>
+    <%= f.label :author_name %><br/>
     <%= f.text_field :author_name %>
   </p>
-
   <p>
-    <%= f.label :body, "Your Comment" %><br/>
+    <%= f.label :body %><br/>
     <%= f.text_area :body %>
   </p>
-  <p> <%= f.submit 'Submit' %> </p>
-
+  <p>
+    <%= f.submit 'Submit' %>
+  </p>
 <% end %>
