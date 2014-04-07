@@ -1,0 +1,1 @@
+A simple blog application following http://tutorials.jumpstartlab.com/projects/blogger.html
