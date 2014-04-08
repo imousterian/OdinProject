@@ -35,6 +35,9 @@ end
 # use paperclip for managing image files
 gem 'paperclip'
 
+# use sorcery for authentication
+gem 'sorcery'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
