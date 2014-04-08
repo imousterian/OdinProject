@@ -1,22 +1,24 @@
 <h1><%= @article.title %></h1>
 
-<p><%= image_tag @article.image.url %></p>
-<p><%= @article.body %></p>
+<!--p><%= image_tag @article.image.url %></p-->
 
+<p><%= @article.body %></p>
+<br>
 <p> Tags:
     <% @article.tags.each do |tag| %>
         <%= link_to tag.name, tag_path(tag) %>
     <% end %>
 </p>
 
-<h3>Comments (<%= @article.comments.size %>) </h3>
+<br>
+<h3>Comments (<%= @article.comments.size %>) </h3> <br>
 <%= render partial: 'articles/comment', collection: @article.comments %>
-<%= render partial: 'comments/form' %>
+<br><br><%= render partial: 'comments/form' %>
 
-<%= link_to "<< Back to Articles", articles_path %>
+<br><%= link_to "<< Back to Articles", articles_path %>
 <% if logged_in? %>
-    <%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really delete this article?"} %>
-    <%= link_to "edit", edit_article_path(@article) %>
+    | <%= link_to "delete", article_path(@article), method: :delete, data: {confirm: "Really delete this article?"} %>
+    | <%= link_to "edit", edit_article_path(@article) %>
 <% end %>
 
 

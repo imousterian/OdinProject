@@ -3,22 +3,24 @@
 <table>
   <thead>
     <tr>
-      <th>Username &nbsp;</th>
-      <th>Email &nbsp;</th>
+      <th><b>Username &nbsp;&nbsp;</b></th>
+      <th><b>Email &nbsp;</b></th>
       <th></th>
       <th></th>
       <th></th>
     </tr>
-  </thead>
+    <tr> <th> &nbsp; </th></tr>
 
+  </thead>
   <tbody>
+
     <% @authors.each do |author| %>
       <tr>
         <td><%=author.username %></td>
         <td><%= author.email %></td>
-        <td><%= link_to "Show", author %></td>
-        <td><%= link_to "Edit", edit_author_path(author) %></td>
-        <td><%= link_to "Destroy", author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td> &nbsp; <%= link_to "Show", author %></td>
+        <td> &nbsp; | <%= link_to "Edit", edit_author_path(author) %></td>
+        <td> &nbsp; | <%= link_to "Destroy", author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,3 +29,5 @@
 <br>
 
 <%= link_to 'New Author', new_author_path %>
+<br>
+
