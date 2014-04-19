@@ -33,9 +33,9 @@ puts substrings("Howdy partner, sit down! How's it going?", dictionary)
 
 #     results = []
 
-#     (0..str.length).each do |c|
-#         (1..str.length - c).each do |i|
-#             sub = str[c...c+i ].join("")
+#     (0..str.length).each do |j|
+#         (1..str.length - j).each do |i|
+#             sub = str[j...j+i ].join("")
 #             results.push(sub.downcase)
 #         end
 #     end
