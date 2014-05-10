@@ -154,7 +154,7 @@ module Enumerable
                     initial = i
                     result = initial
                 else
-                    result = result.__send__(sym,i)
+                    result = result.send(sym,i)
                 end
             end
         end
