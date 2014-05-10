@@ -479,47 +479,16 @@ describe "enumerable" do
             n.should == [4,6,8,10]
         end
 
-        it "should be execute proc" do
+        it "should execute proc" do
             add_one = Proc.new { |x| x + 1 }
             n = [1,2,3,4].my_map_two_args(add_one)
             n.should == [2,3,4,5]
         end
 
-        it "should be execute block" do
+        it "should execute block" do
             n = [1,2,3,4].my_map_two_args { |x| x * 2 }
             n.should == [2,4,6,8]
         end
     end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
