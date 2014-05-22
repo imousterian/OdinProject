@@ -1,0 +1,14 @@
+Steps for the project
+
+1. Create new app => rails new re-former
+2. Create a User model with the following fields => rails generate model User username:string email:string password:string
+3. Migrate a User database => rake db:migrate
+4. Add validations to User model =>
+    validates :username, presence: true, length: {maximum: 20}
+    validates :email, presence: true
+    validates :password, presence: true
+
+5. Create :users resources in routes.rb with :only option for :new and :create actions
+6. Create UserController => rails generate controller Users
+7. Create #new and #create methods in UsersController (empty methods at this step)
+8. Create a new view => app/views/users/new.html.erb
