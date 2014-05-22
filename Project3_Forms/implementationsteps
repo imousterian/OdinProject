@@ -12,3 +12,18 @@ Steps for the project
 6. Create UserController => rails generate controller Users
 7. Create #new and #create methods in UsersController (empty methods at this step)
 8. Create a new view => app/views/users/new.html.erb
+
+Building the form from scratch:
+1.
+<form accept-charset="UTF-8" action="/users" method="post">
+
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+
+        Name: <input type="text" name="username"><br>
+        Email: <input type="text" name="useremail"><br>
+        Password: <input type="password" name="userpassword"><br>
+
+        <input type="submit" value="Submit">
+</form>
+
+2.
