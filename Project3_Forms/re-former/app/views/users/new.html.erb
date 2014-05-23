@@ -6,26 +6,37 @@
         <input id="1" type="text" name="user[username]"><br>
 
         <label for="useremail"> Email: </label>
-        <input id="2" type="text" name="user[useremail]"><br>
+        <input id="2" type="text" name="user[email]"><br>
 
         <label for="userpassword"> Password: </label>
-        <input id="3" type="password" name="user[userpassword]"><br>
+        <input id="3" type="password" name="user[password]"><br>
 
         <input type="submit" value="Submit">
 
 </form> -->
 
-<!--%= form_tag('/users') do %>
+<!-- <%= form_tag('/users') do %>
     <div>
         <%= label_tag 'username', 'Username' %>
         <%= text_field_tag(:username) %><br>
 
         <%= label_tag 'useremail', 'Email' %>
-        <%= text_field_tag(:useremail) %><br>
+        <%= text_field_tag(:email) %><br>
 
         <%= label_tag "userpassword", 'Password' %>
-        <%= password_field_tag(:userpassword) %><br>
+        <%= password_field_tag(:password) %><br>
 
         <%= submit_tag 'Submit' %>
     </div>
-<% end %-->
+<% end %> -->
+
+
+<%= form_for @user do |u| %>
+        <%= u.label :username %>
+        <%= u.text_field :username %> <br />
+    Email: <%= u.text_field :email %> <br />
+    Password: <%= u.password_field :password %> <br />
+
+    <%= u.submit %>
+
+<% end %>
