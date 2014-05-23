@@ -14,16 +14,36 @@ Steps for the project
 8. Create a new view => app/views/users/new.html.erb
 
 Building the form from scratch:
-1.
+
 <form accept-charset="UTF-8" action="/users" method="post">
 
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
 
-        Name: <input type="text" name="username"><br>
-        Email: <input type="text" name="useremail"><br>
-        Password: <input type="password" name="userpassword"><br>
+        <label for="username"> Name: </label>
+        <input id="1" type="text" name="user[username]"><br>
+
+        <label for="useremail"> Email: </label>
+        <input id="2" type="text" name="user[useremail]"><br>
+
+        <label for="userpassword"> Password: </label>
+        <input id="3" type="password" name="user[userpassword]"><br>
 
         <input type="submit" value="Submit">
+
 </form>
 
-2.
+Rebuilding the form using form_tag helper
+<%= form_tag('/users') do %>
+    <div>
+        <%= label_tag 'username', 'Username' %>
+        <%= text_field_tag 'user[username]' %><br>
+
+        <%= label_tag 'useremail', 'Email' %>
+        <%= text_field_tag 'user[useremail]' %><br>
+
+        <%= label_tag "userpassword", 'Password' %>
+        <%= password_field_tag 'user[userpassword]' %><br>
+
+        <%= submit_tag 'Submit' %>
+    </div>
+<% end %>
