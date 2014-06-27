@@ -1,0 +1,16 @@
+<h1>Posts</h1>
+
+<div>
+
+    <% @posts.each do |p| %>
+        <% if signed_in? %>
+            <p>
+                Posted by <%= current_user.name %>
+            </p>
+        <% end %>
+        <p>
+            <%= p.content %>
+        </p>
+    <% end %>
+
+</div>

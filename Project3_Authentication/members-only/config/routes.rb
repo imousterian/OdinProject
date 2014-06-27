@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
     resources :sessions
     resources :users
+    resources :posts, only: [:new, :create, :index]
 
-    root 'sessions#index'
+    root 'posts#index'
 #
     match '/signin', to: 'sessions#new', via: 'get' # mapping signin route to acton 'new'
     match '/signout', to: 'sessions#destroy', via: 'delete'

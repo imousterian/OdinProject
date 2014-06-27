@@ -32,4 +32,12 @@ module SessionsHelper
         !current_user.nil?
     end
 
+    def restrict_to_signed_in
+        unless signed_in?
+            session[:return_to] = request.url if request.get?
+            redirect_to signin_path, notice: "Please sign in"
+        end
+        # current_user
+    end
+
 end
