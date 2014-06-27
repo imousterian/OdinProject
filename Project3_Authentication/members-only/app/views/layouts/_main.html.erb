@@ -1,0 +1,11 @@
+<h1> This is a VIP club for members only </h1>
+<div>
+
+    <% if signed_in? %>
+        <p><%= "Logged in as " + current_user.name %></p>
+        <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+    <% else %>
+        <li><%= link_to "Sign in", signin_path %></li>
+    <% end %>
+
+</div>

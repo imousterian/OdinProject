@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+
+    resources :sessions
+    resources :users
+
+    root 'sessions#index'
+#
+    match '/signin', to: 'sessions#new', via: 'get' # mapping signin route to acton 'new'
+    match '/signout', to: 'sessions#destroy', via: 'delete'
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
