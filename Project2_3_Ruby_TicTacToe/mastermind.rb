@@ -1,5 +1,16 @@
 =begin
 still refactoring ...
+
+instructions
+
+1. Build the game assuming the computer randomly selects the secret colors and the human player must guess them.
+    Remember that you need to give the proper feedback on how good the guess was each turn!
+2. Now refactor your code to allow the human player to choose whether she wants to be the creator of the secret code or the guesser.
+3. Build it out so that the computer will guess if you decide to choose your own secret colors.
+    Start by having the computer guess randomly (but keeping the ones that match exactly).
+4. Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color
+    but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
+
 =end
 
 $color_choices = %w{ red green blue yellow orange white purple violet }
@@ -9,9 +20,21 @@ class MasterMind
     def initialize(num)
         @board = Array.new(num) { |i| [' '] }
         $color_choices = $color_choices.map { |i| i[0].upcase }
-        @codemaker = $color_choices.shuffle.slice(0..3)
-        puts @codemaker.join(' ')
+        # make_secret_code(code_input)
+        # puts @codemaker.join(' ')
+    end
 
+    def make_secret_code(code_input)
+        if code_input == '2'
+            @codemaker = $color_choices.shuffle.slice(0..3) # computer generates the secret code
+        elsif code_input == '1'
+            # need to allow a human to create an secret code
+            puts "Choose 4 colors.\n\n"
+            @codemaker = convert_input
+        else
+            puts "Wrong input! Try again."
+        end
+        # puts @codemaker.join(' ')
     end
 
     def convert_input
@@ -22,7 +45,6 @@ class MasterMind
     def input_not_valid?
         return true if @guess.length != 4
         @guess.any? { |i|  !$color_choices.include?(i) }
-
     end
 
     def create_feedback_array
@@ -105,34 +127,41 @@ class Game
                 puts "This is not a number! Try again..."
             else
                 if num.to_i.even?
+
                     puts "The following colors are available: R for red, G for green, B for blue, Y for yellow, O for orange, W for white, P for purple, V for violet."
 
+                    puts "Do you want to create a secret code or do you want to guess?"
+                    puts "Enter 1 for the former. Enter 2 for the latter."
+
+                    choice = gets.chomp
+
                     master = MasterMind.new(num.to_i)
+                    master.make_secret_code(choice)
 
-                    while rounds_counter <= num.to_i
+                        while rounds_counter <= num.to_i
 
-                        puts "Round #{rounds_counter}. Choose 4 colors: #{convert_colors_to_letters}.\n\n"
-                        master.check_guess(rounds_counter)
-                        puts ' '
-                        self.display_title
-                        master.display_board
-                        puts ' '
+                            puts "Round #{rounds_counter}. Choose 4 colors: #{convert_colors_to_letters}.\n\n"
+                            master.check_guess(rounds_counter)
+                            puts ' '
+                            self.display_title
+                            master.display_board
+                            puts ' '
 
-                        rounds_counter = num.to_i if master.won? == true
+                            rounds_counter = num.to_i if master.won? == true
 
-                        rounds_counter += 1
+                            rounds_counter += 1
 
-                        rounds_counter -= 1 if master.won? == 0
+                            rounds_counter -= 1 if master.won? == 0
 
-                    end
+                        end
 
-                    if master.won? == true
-                        puts "Hoorray, you guessed all numbers!"
-                        continue = false
-                    else
-                        puts "Sorry..."
-                        continue = false
-                    end
+                        if master.won? == true
+                            puts "Hoorray, you guessed all numbers!"
+                            continue = false
+                        else
+                            puts "Sorry..."
+                            continue = false
+                        end
 
                 else
                     puts "it must be an even number!"
@@ -150,8 +179,6 @@ game.play
 # a = gets.chomp
 # a = a.chars.reject { |i| i == ' '}.map {|i| i.upcase }
 # puts a.any? {|i| !choices.include?(i) }
-
-
 
 
 
