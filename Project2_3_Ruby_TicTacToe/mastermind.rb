@@ -20,21 +20,20 @@ class MasterMind
     def initialize(num)
         @board = Array.new(num) { |i| [' '] }
         $color_choices = $color_choices.map { |i| i[0].upcase }
-        # make_secret_code(code_input)
         # puts @codemaker.join(' ')
     end
 
     def make_secret_code(code_input)
         if code_input == '2'
-            @codemaker = $color_choices.shuffle.slice(0..3) # computer generates the secret code
+            # computer generates the secret code
+            @codemaker = $color_choices.shuffle.slice(0..3)
         elsif code_input == '1'
-            # need to allow a human to create an secret code
-            puts "Choose 4 colors.\n\n"
+            # human creates an secret code
+            puts "Choose 4 colors: R G B Y O W P V\n\n"
             @codemaker = convert_input
         else
             puts "Wrong input! Try again."
         end
-        # puts @codemaker.join(' ')
     end
 
     def convert_input
@@ -56,20 +55,35 @@ class MasterMind
         end
     end
 
-    def check_guess(rounds_counter)
-
-        convert_input
+    def check_guess(rounds_counter, code_input)
 
         @feedback = Array.new
 
-        if input_not_valid? == true
-            puts "Your input is incorrect. Try playing again..."
-        else
+        if code_input == '2'
+
+            convert_input
+
+            if input_not_valid? == true
+                puts "Your input is incorrect. Try playing again..."
+            else
+                create_feedback_array
+                # add selected choices and feedback to the board
+                @board[rounds_counter-1].replace([@guess, '|', @feedback.shuffle])
+            end
+        elsif code_input == '1'
+            # computer makes a guess. The guess function is based on the feedback
+            computer_makes_random_guess
+            # create feedback
             create_feedback_array
-            # add selected choices and feedback to the board
-            @board[rounds_counter-1].replace([@guess, '|', @feedback.shuffle])
+            # display results on the board
+            @board[rounds_counter-1].replace([@guess, '|', @feedback.shuffle]) #=> but @guess should be a different array?
+
         end
 
+    end
+
+    def computer_makes_random_guess
+        @guess = $color_choices.shuffle.slice(0..3)
     end
 
     def display_board
@@ -82,9 +96,7 @@ class MasterMind
     end
 
     def won?
-        # puts "length " + @feedback.length.to_s
         if @feedback.empty?
-            # puts "test"
             return 0
         else
             @feedback.count('B') == 4 ? true : false
@@ -136,12 +148,13 @@ class Game
                     choice = gets.chomp
 
                     master = MasterMind.new(num.to_i)
+
                     master.make_secret_code(choice)
 
                         while rounds_counter <= num.to_i
 
                             puts "Round #{rounds_counter}. Choose 4 colors: #{convert_colors_to_letters}.\n\n"
-                            master.check_guess(rounds_counter)
+                            master.check_guess(rounds_counter, choice)
                             puts ' '
                             self.display_title
                             master.display_board
