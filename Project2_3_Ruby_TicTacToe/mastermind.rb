@@ -1,16 +1,5 @@
 =begin
-still refactoring ...
-
-instructions
-
-1. Build the game assuming the computer randomly selects the secret colors and the human player must guess them.
-    Remember that you need to give the proper feedback on how good the guess was each turn!
-2. Now refactor your code to allow the human player to choose whether she wants to be the creator of the secret code or the guesser.
-3. Build it out so that the computer will guess if you decide to choose your own secret colors.
-    Start by having the computer guess randomly (but keeping the ones that match exactly).
-4. Next, add a little bit more intelligence to the computer player so that, if the computer has guessed the right color
-    but the wrong position, its next guess will need to include that color somewhere. Feel free to make the AI even smarter.
-
+could still be refactored and improved.
 =end
 
 $color_choices = %w{ red green blue yellow orange white purple violet }
@@ -20,7 +9,6 @@ class MasterMind
     def initialize(num)
         @board = Array.new(num) { |i| [' '] }
         $color_choices = $color_choices.map { |i| i[0].upcase }
-        # puts @codemaker.join(' ')
     end
 
     def make_secret_code(code_input)
@@ -72,67 +60,50 @@ class MasterMind
             else
                 create_feedback_array
                 # add selected choices and feedback to the board
-                # print @feedback
                 @board[rounds_counter-1].replace([@guess, '|', @feedback.compact.shuffle])
             end
 
         elsif code_input == '1'
-            # computer makes a guess. The guess function is based on the feedback
-            # puts " guess is "
-            # print @guess
-            # puts " \nstuff "
 
+            computer_makes_guess
 
-            computer_makes_random_guess
-            # create feedback
             create_feedback_array
-            # print @feedback
-            # puts ""
-            # print @guess
-            # puts ""
 
-            find_position_of_matching_elements
+            keep_correctly_guessed_elements
+
             # display results on the board
             @board[rounds_counter-1].replace([@guess, '|', @feedback.compact.shuffle])
-            # print @board[rounds_counter-1]
 
         end
 
     end
 
-    def find_position_of_matching_elements
+    def keep_correctly_guessed_elements
         indices = @feedback.map.with_index {|x,i| i unless x.nil?}.compact
         @guessed_correctly = indices.map.with_index {|x,i| @guess[x]}
-        # print @indices
-        puts "\nguessed corrrectly"
-        print @guessed_correctly
     end
 
-    def computer_makes_random_guess
+    def computer_makes_guess
         if @guess.nil?
+            # first round, computer makes a random guess
             @guess = $color_choices.shuffle.slice(0..3)
         else
-            if !determine_stuff.nil?
-                @guess = @guessed_correctly + determine_stuff
+            # other rounds, computer keeps correctly guessed elements and adds new ones as needed
+            if !extra_elements_to_be_guessed.nil?
+                @guess = @guessed_correctly + extra_elements_to_be_guessed
             else
                 @guess
             end
         end
     end
 
-    def determine_stuff
+    def extra_elements_to_be_guessed
         diff = $color_choices - @guessed_correctly
 
         if @guessed_correctly.length < 4
             len = 4 - @guessed_correctly.length
             @rand = diff.shuffle.slice(0..len-1)
-        else
-            # len = 1
         end
-
-    end
-
-    def computer_makes_guess_based_on_feedback
 
     end
 
