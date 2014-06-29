@@ -27,10 +27,12 @@ class MasterMind
         if code_input == '2'
             # computer generates the secret code
             @codemaker = $color_choices.shuffle.slice(0..3)
+            puts @codemaker.join(' ')
         elsif code_input == '1'
             # human creates an secret code
             puts "Choose 4 colors: R G B Y O W P V\n\n"
             @codemaker = convert_input
+            @guess = nil # probably need to change that so that the code doesn't depend on resetting @guess
         else
             puts "Wrong input! Try again."
         end
@@ -51,6 +53,8 @@ class MasterMind
         @guess.each_with_index do |value, index|
             if @codemaker.include?(value)
                 value == @codemaker[index] ? @feedback.push('B') : @feedback.push('W')
+            else
+                @feedback.push(nil)
             end
         end
     end
@@ -68,27 +72,72 @@ class MasterMind
             else
                 create_feedback_array
                 # add selected choices and feedback to the board
-                @board[rounds_counter-1].replace([@guess, '|', @feedback.shuffle])
+                # print @feedback
+                @board[rounds_counter-1].replace([@guess, '|', @feedback.compact.shuffle])
             end
+
         elsif code_input == '1'
             # computer makes a guess. The guess function is based on the feedback
+            # puts " guess is "
+            # print @guess
+            # puts " \nstuff "
+
+
             computer_makes_random_guess
             # create feedback
             create_feedback_array
+            # print @feedback
+            # puts ""
+            # print @guess
+            # puts ""
+
+            find_position_of_matching_elements
             # display results on the board
-            @board[rounds_counter-1].replace([@guess, '|', @feedback.shuffle]) #=> but @guess should be a different array?
+            @board[rounds_counter-1].replace([@guess, '|', @feedback.compact.shuffle])
+            # print @board[rounds_counter-1]
 
         end
 
     end
 
+    def find_position_of_matching_elements
+        indices = @feedback.map.with_index {|x,i| i unless x.nil?}.compact
+        @guessed_correctly = indices.map.with_index {|x,i| @guess[x]}
+        # print @indices
+        puts "\nguessed corrrectly"
+        print @guessed_correctly
+    end
+
     def computer_makes_random_guess
-        @guess = $color_choices.shuffle.slice(0..3)
+        if @guess.nil?
+            @guess = $color_choices.shuffle.slice(0..3)
+        else
+            if !determine_stuff.nil?
+                @guess = @guessed_correctly + determine_stuff
+            else
+                @guess
+            end
+        end
+    end
+
+    def determine_stuff
+        diff = $color_choices - @guessed_correctly
+
+        if @guessed_correctly.length < 4
+            len = 4 - @guessed_correctly.length
+            @rand = diff.shuffle.slice(0..len-1)
+        else
+            # len = 1
+        end
+
+    end
+
+    def computer_makes_guess_based_on_feedback
+
     end
 
     def display_board
         @board.each_with_index do |arr, index|
-
             len = arr.flatten.map { |i| i.chars }.flatten.length
             puts arr.join(' ')
             puts "-" * (len + (18 - len))
