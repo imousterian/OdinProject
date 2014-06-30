@@ -36,25 +36,24 @@ def clean_phone_numbers(phone)
 
 end
 
-def time_targeting(time)
 
-    d = DateTime.strptime(time, '%m/%d/%y %H:%M')
-
-    if @records.has_key?(d.hour)
-        @records[d.hour] += 1
+def find_busiest(time_obj,target_array)
+    if target_array.has_key?(time_obj)
+        target_array[time_obj] += 1
     else
-        @records[d.hour] = 1
+        target_array[time_obj] = 1
     end
-
-    @records.values.max
-
+    target_array
 end
 
 
 template_letter = File.read "form_letter.erb"
 erb_template = ERB.new template_letter
 contents = CSV.open "full_event_attendees.csv", headers: true, header_converters: :symbol
-@records = Hash.new
+
+time_records = Hash.new
+week_records = Hash.new
+
 contents.each do |row|
 
     id = row[0]
@@ -65,13 +64,19 @@ contents.each do |row|
 
     phone = clean_phone_numbers(row[:homephone])
 
-    busiest_hour = time_targeting(row[:regdate])
+    d = DateTime.strptime(row[:regdate], '%m/%d/%y %H:%M')
+
+    busiest_hour_index = find_busiest(d.hour,time_records)
+    busiest_hour_value = busiest_hour_index.key(busiest_hour_index.values.max)
+    # puts busiest_hour_value
+
+    busiest_day_index = find_busiest(d.wday,week_records)
+    busiest_day_value = Date::DAYNAMES[busiest_day_index.key(busiest_day_index.values.max)]
+    # puts busiest_day_value
 
 
     # legislators = legislators_by_zipcode(zipcode)
-
     # form_letter = erb_template.result(binding)
-
     # save_thank_you_letters(id, form_letter)
 
 end
