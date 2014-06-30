@@ -26,14 +26,6 @@ end
 
 def clean_phone_numbers(phone)
 
-    # =begin
-    #     If the phone number is less than 10 digits assume that it is a bad number
-    #     If the phone number is 10 digits assume that it is good
-    #     If the phone number is 11 digits and the first number is 1, trim the 1 and use the first 10 digits
-    #     If the phone number is 11 digits and the first number is not 1, then it is a bad number
-    #     If the phone number is more than 11 digits assume that it is a bad number
-    # =end
-
     gsubbed_phone = phone.gsub(/\D/, '')
 
     if gsubbed_phone.length == 10 || (gsubbed_phone.length == 11 && gsubbed_phone[0] == '1')
@@ -44,10 +36,25 @@ def clean_phone_numbers(phone)
 
 end
 
+def time_targeting(time)
+
+    d = DateTime.strptime(time, '%m/%d/%y %H:%M')
+
+    if @records.has_key?(d.hour)
+        @records[d.hour] += 1
+    else
+        @records[d.hour] = 1
+    end
+
+    @records.values.max
+
+end
+
+
 template_letter = File.read "form_letter.erb"
 erb_template = ERB.new template_letter
 contents = CSV.open "full_event_attendees.csv", headers: true, header_converters: :symbol
-
+@records = Hash.new
 contents.each do |row|
 
     id = row[0]
@@ -58,6 +65,9 @@ contents.each do |row|
 
     phone = clean_phone_numbers(row[:homephone])
 
+    busiest_hour = time_targeting(row[:regdate])
+
+
     # legislators = legislators_by_zipcode(zipcode)
 
     # form_letter = erb_template.result(binding)
@@ -65,6 +75,7 @@ contents.each do |row|
     # save_thank_you_letters(id, form_letter)
 
 end
+
 
 
 
