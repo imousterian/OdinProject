@@ -24,9 +24,29 @@ def save_thank_you_letters(id,form_letter)
     end
 end
 
+def clean_phone_numbers(phone)
+
+    # =begin
+    #     If the phone number is less than 10 digits assume that it is a bad number
+    #     If the phone number is 10 digits assume that it is good
+    #     If the phone number is 11 digits and the first number is 1, trim the 1 and use the first 10 digits
+    #     If the phone number is 11 digits and the first number is not 1, then it is a bad number
+    #     If the phone number is more than 11 digits assume that it is a bad number
+    # =end
+
+    gsubbed_phone = phone.gsub(/\D/, '')
+
+    if gsubbed_phone.length == 10 || (gsubbed_phone.length == 11 && gsubbed_phone[0] == '1')
+        gsubbed_phone.rjust(11,'1')[1...11]
+    else
+        '0000000000'
+    end
+
+end
+
 template_letter = File.read "form_letter.erb"
 erb_template = ERB.new template_letter
-contents = CSV.open "event_attendees.csv", headers: true, header_converters: :symbol
+contents = CSV.open "full_event_attendees.csv", headers: true, header_converters: :symbol
 
 contents.each do |row|
 
@@ -36,11 +56,13 @@ contents.each do |row|
 
     zipcode = clean_zipcode(row[:zipcode])
 
-    legislators = legislators_by_zipcode(zipcode)
+    phone = clean_phone_numbers(row[:homephone])
 
-    form_letter = erb_template.result(binding)
+    # legislators = legislators_by_zipcode(zipcode)
 
-    save_thank_you_letters(id, form_letter)
+    # form_letter = erb_template.result(binding)
+
+    # save_thank_you_letters(id, form_letter)
 
 end
 
