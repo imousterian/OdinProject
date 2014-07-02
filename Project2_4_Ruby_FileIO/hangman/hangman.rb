@@ -124,7 +124,7 @@ class Game
                 start_saved_game(number_selection)
 
                 if @counter >= 12
-                    puts "\nYou can't play the game that it's already over."
+                    puts "\nYou can't play the game that's already over."
                 end
             end
         end
