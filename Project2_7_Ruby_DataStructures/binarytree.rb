@@ -113,7 +113,8 @@ end
 
 
 # tests:
-array_sorted = [16,14,10,8,7,9,3,2,4,1]
+# array_sorted = [16,14,10,8,7,9,3,2,4,1]
+array_sorted = [28,22,32,38,21,11,26,36]
 root = array_sorted[0]
 btree = TreeBuilder.new(root)
 btree_array = btree.build_tree(array_sorted)
