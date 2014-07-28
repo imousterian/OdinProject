@@ -1,0 +1,18 @@
+require 'rspec/core/rake_task'
+
+task :default => %w[spec]
+
+task :spec do
+    ruby "lib/CaesarCipher.rb"
+end
+
+desc "run tests for caesaer's cipher"
+
+RSpec::Core::RakeTask.new do |task|
+    task.rspec_opts = [ '-f documentation', '-r ./rspec_config']
+    task.verbose = false
+end
+
+
+
+
