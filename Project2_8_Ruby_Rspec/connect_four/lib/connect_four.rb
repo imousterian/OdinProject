@@ -1,6 +1,6 @@
 class Board
 
-    attr_accessor :cols, :rows, :matrix, :test
+    attr_accessor :cols, :rows, :matrix
 
     def initialize(rows,cols)
         @cols = cols
