@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="calculator.js"></script>
+</head>
+    <body>
+        <table id="calculator">
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <input type="text" readonly="readonly" id="calc_result">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="clear_btn" value="CE">
+                    </td>
+                    <td>
+                        <input type="button" class="operator_btn" value="&#177;" name="plusminus">
+                    </td>
+                    <td>
+                        <input type="button" class="operator_btn" value="&#247;" name="division">
+                    </td>
+                    <td>
+                        <input type="button" class="operator_btn" value="x">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="number_btn" value="7">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="8">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="9">
+                    </td>
+                    <td>
+                        <input type="button" class="operator_btn" value="-">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="number_btn" value="4">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="5">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="6">
+                    </td>
+                    <td>
+                        <input type="button" class="operator_btn" value="+">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="button" class="number_btn" value="1">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="2">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value="3">
+                    </td>
+                    <td rowspan="2">
+                        <input type="button" class="result_btn" style="height:50px; background: grey;" value="=">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="button" class="number_btn" value="0">
+                    </td>
+                    <td>
+                        <input type="button" class="number_btn" value=".">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
