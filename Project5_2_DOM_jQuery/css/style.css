@@ -24,7 +24,7 @@
     padding-left:12%;
 }
 
-.tab-links a {
+.tab-links p {
     padding:9px 15px;
     display:inline-block;
     border-radius:3px 3px 0px 0px;
@@ -35,12 +35,12 @@
     transition:all linear 0.15s;
 }
 
-.tab-links a:hover {
+.tab-links p:hover {
     background:#a7cce5;
     text-decoration:none;
 }
 
-li.active a, li.active a:hover {
+li.active p, li.active a:hover {
     background:#fff;
     color:#4c4c4c;
 }
