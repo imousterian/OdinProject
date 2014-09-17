@@ -2,9 +2,9 @@ $(function(){
 
     $('#content').append("<div class='tabs'></div>").prepend("<img id='theImg' src='images/guinea-pig-1.jpg' />").prepend("<h1>We are the best restaurant for your guinea pig!</h1>");
     $('.tabs').append("<ul class='tab-links'></ul>");
-    var lis = "<li><a href='#' id='atab1' class='tab1'>About Us</a></li>" +
-                "<li><a href='#' id='atab2' class='tab2'>Contact</a></li>" +
-                "<li><a href='#' id='atab3' class='tab3'>Menu</a></li>";
+    var lis = "<li><a id='atab1' class='tab1'>About Us</a></li>" +
+                "<li><a id='atab2' class='tab2'>Contact</a></li>" +
+                "<li><a id='atab3' class='tab3'>Menu</a></li>";
     $('.tab-links').append(lis);
     $('.tabs').append("<div class='tab-content'></div>");
 
