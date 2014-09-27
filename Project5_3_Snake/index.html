@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hello Snake !</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" href="css/style.css" rel="stylesheet">
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/snake.js"></script>
+        <style>
+            .body_piece{
+                background-image:url('images/body_piece.png');
+                background-repeat:no-repeat;
+            }
+            .head_up{
+                background-image:url('images/head_up.png');
+                background-repeat:no-repeat;
+            }
+            .head_left{
+                background-image:url('images/head_left.png');
+                background-repeat:no-repeat;
+            }
+            .head_right{
+                background-image:url('images/head_right.png');
+                background-repeat:no-repeat;
+            }
+            .head_down{
+                background-image:url('images/head_down.png');
+                background-repeat:no-repeat;
+            }
+
+        </style>
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <center>
+            <h1> Snake Game </h1>
+            <div id="options_wrapper">
+                <button type="submit" id="submitter">New Game</button>
+            </div>
+            <div id="points_wrapper">
+                <label>Points:</label>
+                <div id="points">0</div>
+            </div>
+            <div class="wrapper">
+            </div>
+        </center>
+    </body>
+</html>

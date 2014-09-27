@@ -1,0 +1,33 @@
+body{
+    background-color: white;
+}
+h1{
+    margin-bottom: 10px;
+}
+label{
+    float:left;
+}
+#options_wrapper{
+    margin-bottom: 10px;
+}
+#points_wrapper{
+    width:80px;
+    padding-bottom: 30px;
+}
+#points{
+    float:right;
+}
+.grid{
+    border: 1px dotted lightgrey;
+    display: inline-block;
+    float:left;
+}
+.wrapper{
+    border: darkblue 2px solid;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    border-collapse:collapse;
+    padding: 0px;
+    clear:both;
+}
