@@ -1,0 +1,44 @@
+#container{
+    overflow: hidden;
+    height: 600px;
+}
+.carousel-control > img{
+    margin-top: 252px;
+}
+.carousel-control{
+    width: 63px;
+    background: black;
+    height: 600px;
+}
+.carousel > div:not(.active){
+    display: none;
+}
+.next{
+    float: right;
+}
+.prev{
+    float: left;
+}
+.carousel{
+    width: 80%;
+    float: left;
+}
+#circles {
+  list-style:none;
+}
+#circles li {
+    display:inline-block;
+    border-radius:15px;
+    width:15px;
+    height:15px;
+    margin: 0 0 10px 10px;
+    border:2px solid red;
+    background: black;
+    cursor:pointer;
+}
+#circles li.active {
+    background:red;
+    border:2px solid black;
+}
+
+
