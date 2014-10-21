@@ -1,0 +1,62 @@
+.wrapper{
+    width: 561px;
+    height:561px;
+    font-size: 62px;
+    overflow: hidden;
+    background: #eee;
+}
+
+#button_wrapper{
+    margin-bottom: 10px;
+}
+
+.box > div{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.box
+{
+    height: 100%;
+    width: 185px;
+    border: 1px dotted black;
+    display: table-cell;
+    float: left;
+}
+
+.box:hover
+{
+    background: #6699FF;
+    cursor: pointer;
+}
+
+.opened{
+    background: #6699FF;
+}
+
+.opened > div{
+    font-weight: bold;
+    color: red;
+}
+
+/* flipping */
+.flip-container {
+    perspective: 1000;
+    transform-style: preserve-3d;
+    height: 187px;
+    display: table;
+}
+
+.flip{
+    transform: rotateY(180deg);
+    background: #eee;
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
