@@ -1,7 +1,7 @@
 .wrapper{
-    width: 561px;
-    height:561px;
-    font-size: 62px;
+    width: 562px;
+    height:562px;
+    font-size: 82px;
     overflow: hidden;
     background: #eee;
 }
@@ -11,23 +11,21 @@
 }
 
 .box > div{
-    position: relative;
+    position: absolute;
     top: 50%;
+    left: 35%;
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
 }
 
-.box
-{
+.box{
     height: 100%;
     width: 185px;
     border: 1px dotted black;
     display: table-cell;
-    float: left;
 }
 
-.box:hover
-{
+.box:hover{
     background: #6699FF;
     cursor: pointer;
 }
@@ -47,16 +45,21 @@
     transform-style: preserve-3d;
     height: 187px;
     display: table;
+    -webkit-transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
 }
 
 .flip{
     transform: rotateY(180deg);
     background: #eee;
+    -webkit-transform: rotateY(180deg);
 }
 
 .flipper {
     transition: 0.6s;
+    -webkit-transition: -webkit-transform 0.6s;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     position: relative;
 }
 

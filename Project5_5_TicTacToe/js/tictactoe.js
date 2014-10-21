@@ -61,8 +61,9 @@ $(function(){
         }
 
         this.gameOver = function(){
+            var that = this;
             if (this.determineWinner() !== undefined){
-                alert("The winner is " + this.drawMark(this.determineWinner()));
+                setTimeout(function(){ alert("The winner is " + that.drawMark(that.determineWinner())) }, 100);
             }
             if (this.turnsLeft() == 0){
                 alert("Sorry, no more turns!");
