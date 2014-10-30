@@ -80,7 +80,13 @@ class Pawn < Piece
 
     def where_to_go?(x,y)
         if @step_counter > 1
-            step = 2
+            if (@old_location[0] - x).abs == 1
+                step = 1
+            elsif (@old_location[0] - x).abs == 2
+                step = 2
+            else
+                step = 0
+            end
         else
             step = 1
         end
