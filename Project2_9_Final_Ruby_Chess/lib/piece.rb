@@ -24,11 +24,21 @@ class Piece
     end
 
     def move_to(x,y)
-        if x.nil?
-            raise ArgumentError, "x and y must be within the board"
-        else
-            @x, @y = x, y
-            set_id
+        @x, @y = x, y
+        set_id
+    end
+
+    def piece_movements?(from_x, from_y, to_x, to_y)
+        false
+    end
+
+    def valid_move?(board, from_x, from_y, to_x, to_y)
+        destination = board.destination
+        move = piece_movements?(from_x, from_y, to_x, to_y)
+        path_blocked = board.is_it_blocked?(from_x, from_y, to_x, to_y)
+
+        if destination.nil? || destination.color != @color
+            return true if move == true && path_blocked == false
         end
     end
 
@@ -64,7 +74,6 @@ class Pawn < Piece
     end
 
     def where_to_go?(to_x,to_y)
-
         step = determine_step_counter(to_x)
 
         if  @color == :white
@@ -72,6 +81,13 @@ class Pawn < Piece
         else
             to_x == (@x + step) && (to_y == @y) ? true : false
         end
+    end
+
+    def piece_movements?(from_x, from_y, to_x, to_y)
+        x = (from_x - to_x).abs
+        y = (from_y - to_y).abs
+        return true if (x >= 0 and x <= 1 && y >= 0 && y <= 1)
+        false
     end
 
     def valid_move?(board, from_x, from_y, to_x, to_y)
@@ -98,16 +114,12 @@ class King < Piece
         places = []
         moves = [ [@x-1,@y], [@x-1, @y-1], [@x, @y-1], [@x+1, @y-1], [@x+1, @y], [@x+1, @y+1], [@x, @y+1], [@x-1, @y+1] ]
         moves.each do |i|
-           move_x = i[0]
-           move_y = i[1]
-           if (move_x >= 0 && move_x <= 7) && (move_y >= 0 && move_y <= 7)
-                loc = Converter.convert_x_y_to_location(move_x, move_y)
+           to_x = i[0]
+           to_y = i[1]
+           if piece_movements?(@x, @y, to_x, to_y)
+                loc = Converter.convert_x_y_to_location(to_x, to_y)
                 cell = board.find_piece_in_collection(loc)
-                if cell.nil?
-                    places << [move_x, move_y]
-                else
-                    places << [move_x, move_y] if cell.color != @color
-                end
+                places << [to_x, to_y] if cell.nil? || cell.color == @color
             end
         end
         places
@@ -120,15 +132,6 @@ class King < Piece
         false
     end
 
-    def valid_move?(board, from_x, from_y, to_x, to_y)
-        destination = board.destination
-        move = piece_movements?(from_x, from_y, to_x, to_y)
-
-        if destination.nil? || destination.color != @color
-            return true if move == true
-        end
-        false
-    end
 end
 
 class Rook < Piece
@@ -140,16 +143,6 @@ class Rook < Piece
     def piece_movements?(from_x, from_y, to_x, to_y)
         return true if from_x == to_x || from_y == to_y
         false
-    end
-
-    def valid_move?(board, from_x, from_y, to_x, to_y)
-        destination = board.destination
-        move = piece_movements?(from_x, from_y, to_x, to_y)
-        path_blocked = board.is_it_blocked?(from_x, from_y, to_x, to_y)
-
-        if destination.nil? || destination.color != @color
-            return true if move == true && path_blocked == false
-        end
     end
 
 end
@@ -167,14 +160,6 @@ class Knight < Piece
         false
     end
 
-    def valid_move?(board, from_x, from_y, to_x, to_y)
-        destination = board.destination
-        move = piece_movements?(from_x, from_y, to_x, to_y)
-        if destination.nil? || destination.color != @color
-            return move
-        end
-        false
-    end
 end
 
 class Bishop < Piece
@@ -187,15 +172,6 @@ class Bishop < Piece
         false
     end
 
-    def valid_move?(board, from_x, from_y, to_x, to_y)
-        destination = board.destination
-        move = piece_movements?(from_x, from_y, to_x, to_y)
-        path_blocked = board.is_it_blocked?(from_x, from_y, to_x, to_y)
-
-        if destination.nil? || destination.color != @color
-            return true if move == true && path_blocked == false
-        end
-    end
 end
 
 class Queen < Piece
@@ -204,12 +180,8 @@ class Queen < Piece
         'Q' + super()
     end
 
-    def valid_move?(board, from_x, from_y, to_x, to_y)
-        destination = board.destination
-        path_blocked = board.is_it_blocked?(from_x, from_y, to_x, to_y)
-
-        if destination.nil? || destination.color != @color
-            return true if path_blocked == false
-        end
+    def piece_movements?(from_x, from_y, to_x, to_y)
+        true
     end
+
 end
