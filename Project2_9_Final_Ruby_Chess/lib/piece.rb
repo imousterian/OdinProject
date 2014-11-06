@@ -158,6 +158,10 @@ class Knight < Piece
         return true if super && (x * 2 == 4 && y == 1) || (x * 2 == 2 && y == 2)
         false
     end
+
+    def valid_move?(board, to_x, to_y)
+        return can_piece_move?(to_x, to_y)
+    end
 end
 
 class Bishop < Piece
