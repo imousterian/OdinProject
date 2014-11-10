@@ -1,0 +1,27 @@
+<div class="row">
+    <div class = "col-sm-6 col-sm-offset-3">
+        <h1>Sign up</h1>
+        <%= form_for(@user) do |f| %>
+
+            <div>
+                <%= f.label :name %>
+                <%= f.text_field :name, class: 'form-control' %><br />
+            </div>
+
+            <div>
+                <%= f.label :email %>
+                <%= f.text_field :email, class: 'form-control' %><br />
+            </div>
+
+            <div>
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+            </div>
+            <br />
+            <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+            <br />
+
+        <% end %>
+
+    </div>
+</div>

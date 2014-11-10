@@ -1,0 +1,16 @@
+<% if signed_in? && @event.creator_id == current_user.id %>
+<br /><br />
+       <label>Join Requests</label>
+       <br /><br />
+        <% if event.pending_requests.present? %>
+            <% event.pending_requests.each do |attendance| %>
+                <p>
+                    <%= attendance.attendee.name %>
+                    <%= link_to 'Accept', accept_request_path(:id => @event.id, :attendance_id => attendance.id),
+                            :class=>"btn btn-success btn-sm" %>
+                </p>
+            <%end%>
+        <%else%>
+            <p>No Pending Requests for this event</p>
+        <%end%>
+<%end%>

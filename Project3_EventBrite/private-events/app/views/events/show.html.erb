@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <table class='table'>
+            <thead>
+                <tr>
+                    <th><h3><%= @event.title %> </h3></th>
+                    <th></th>
+                </tr>
+            <tbody>
+                <tr>
+                    <td><strong>Title:</strong> </td>
+                    <td> <%= @event.title %> </td>
+                </tr>
+                <tr>
+                    <td><strong>Date:</strong></td>
+                    <td><%= l @event.date, :format => :date_format %></td>
+                </tr>
+                <tr>
+                    <td><strong>Location:</strong></td>
+                    <td><%= @event.location %></td>
+                </tr>
+                <tr>
+                    <td><strong>Description:</strong></td>
+                    <td><%= @event.description %></td>
+                </tr>
+                <tr>
+                    <td><strong>Organized By:</strong></td>
+                    <td> <%= @event.creator.name %> </td>
+                </tr>
+                <tr>
+                    <td><strong>Attendees:</strong></td>
+                    <td><% @attendees.each do |att| %>
+                            <p><%= att.attendee.name %></p>
+                        <% end %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <%= link_to 'Back', events_path %>
+        <%= render partial: 'pending', :locals => {:event => @event} %>
+    </div>
+
+</div>

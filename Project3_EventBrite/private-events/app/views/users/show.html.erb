@@ -1,0 +1,27 @@
+<div class="col-md-6 col-sm-offset-1">
+    <div><%= link_to 'Create an Event', new_event_path %> | <%= link_to "Back to events", events_path %></div>
+</div>
+<div class="col-md-6 col-sm-offset-1">
+        <table class='table'>
+            <tr><h3 class="center">Events I Created</h3></tr>
+            <tbody>
+                <% @events.each do |event| %>
+                    <tr>
+                        <td> <p><%= link_to event.title, event_path(event) %></p></td>
+                    </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-4">
+        <table class='table'>
+            <tr><h3 class="center">Events I am Attending</h3></tr>
+            <tbody>
+                <% @user.attendances.approved.each do |att| %>
+                    <tr>
+                        <td><%= link_to att.attended_event.title, event_path(att.attended_event) %></td>
+                    </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

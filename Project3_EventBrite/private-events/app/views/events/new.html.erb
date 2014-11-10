@@ -1,0 +1,29 @@
+<div class="row">
+    <div class = "col-sm-6 col-sm-offset-3">
+        <h1>Create event</h1>
+        <%= form_for(@event) do |f| %>
+            <div>
+                <%= f.label :title %>
+                <%= f.text_field :title, class: 'form-control' %><br />
+            </div>
+            <div>
+                <%= f.label :description %>
+                <%= f.text_field :description, class: 'form-control' %><br />
+            </div>
+            <div>
+                <%= f.label :location %>
+                <%= f.text_field :location, class: 'form-control' %><br />
+            </div>
+            <div>
+                <%= f.label :date %>
+                <%= date_select(:event, :date)%>
+            </div>
+            <div>
+                <%= f.label :status %>
+                <%= f.select :status, options_for_select(["Invitation Only", "No Invitation"])%>
+            </div>
+            <br />
+            <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+        <% end %>
+    </div>
+</div>

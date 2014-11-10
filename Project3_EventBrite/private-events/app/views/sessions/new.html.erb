@@ -1,0 +1,21 @@
+<div class="row">
+    <div class = "col-sm-6 col-sm-offset-3">
+        <h1>Sign in</h1>
+        <%= form_for(:session, url: sessions_path) do |f| %>
+
+            <div>
+                <%= f.label :email %>
+                <%= f.text_field :email, class: 'form-control' %><br />
+            </div>
+
+            <div>
+                <%= f.label :password %>
+                <%= f.password_field :password, class: 'form-control' %>
+            </div>
+            <br />
+            <p><%= f.submit "Sign in", class: "btn btn-large btn-primary" %></p>
+        <% end %>
+    </div>
+</div>
+
+
