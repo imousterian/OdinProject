@@ -1,0 +1,53 @@
+<DOCTYPE html>
+<html lang="en">
+      <head>
+        <title>MineSweeper</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link type="text/css" href="css/style.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="js/minesweeper.js"></script>
+        <script src="js/grid_preparer.js"></script>
+        <script src="js/board.js"></script>
+        <script src="js/cell.js"></script>
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <center>
+            <h1> MineSweeper </h1>
+        </center>
+          <div class="outer-wrapper">
+            <div class="left">
+              <div>
+                <label for="rows" class="inputs" id="rows">Rows</label>
+                <input id="rows" class="inputs" type="number" value="9" min="9" max="40">
+              </div>
+              <div>
+                <label for="cols" class="inputs" id="cols">Cols</label>
+                <input id="cols" class="inputs" type="number" value="9" min="9" max="40">
+              </div>
+              <div>
+                <label for="bombs" class="inputs" id="bombs">Bombs</label>
+                <input id="bombs" class="inputs" type="number" value="10" min="10" max="40">
+              </div>
+              <br>
+              <button class="btn" id="start_game">Start Game</button>
+              <button class="btn" id="stop_timer">Stop Timer</button>
+            </div>
+            <div id='header'>
+                <div id="header-wrapper">
+                  <label for="counter" class="inputs">Timer</label>
+                  <div id="counter" class="inputs">0</div>
+                </div>
+            </div>
+            <div class="box">
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
