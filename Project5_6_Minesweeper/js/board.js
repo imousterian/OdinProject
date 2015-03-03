@@ -1,9 +1,10 @@
-function Board(rows,cols){
+function Board(rows,cols, bombs){
   this.board = [];
   this.mineCollection = [];
   this.cols = cols;
   this.rows = rows;
   this.stack = [];
+  this.bombs = bombs;
 
   for (var i = 0; i < this.rows; i++){
     this.mineCollection[i] = [];
@@ -13,25 +14,24 @@ function Board(rows,cols){
 
   for(var i = 0; i < this.rows; i++){
     this.board[i] = [];
-      for(var j = 0; j < this.cols; j++){
-
-        var mine = this.mineCollection[i][j];
-        mine ? mine = true : mine = 0;
-        var cell = new Cell(i,j,mine);
-        this.board[i][j] = cell;
+    for(var j = 0; j < this.cols; j++){
+      var mine = this.mineCollection[i][j];
+      mine ? mine = true : mine = 0;
+      var cell = new Cell(i,j,mine);
+      this.board[i][j] = cell;
     }
   }
 
   for(var i = 0; i < this.rows; i++){
-      for(var j = 0; j < this.cols; j++){
-        var cell = this.getCell(i,j);
-        cell.setNeighbors(this);
+    for(var j = 0; j < this.cols; j++){
+      var cell = this.isValidCell(i,j);
+      cell.setNeighbors(this);
     }
   }
 }
 
 Board.prototype.createMines = function(){
-  for (var i = 0; i < 10; i++){
+  for (var i = 0; i < this.bombs; i++){
     this.generateMine();
   }
 }
@@ -43,16 +43,11 @@ Board.prototype.generateMine = function(){
     return this.generateMine();
   }
   this.mineCollection[x][y] = true;
-  $("div.cell"+"[row="+x+"]"+"[col="+y+"]").addClass('bomb');
-}
-
-Board.prototype.getCell = function(x,y){
-  return this.board[x][y];
+  $("div.cell"+"[row="+x+"]"+"[col="+y+"]").addClass('bomb').append('<img src="images/mine.png"/>');
 }
 
 Board.prototype.isValidCell = function(x,y){
-  if (x >= 0 && x < this.rows && y >= 0 && y < this.cols )
-  {
+  if (x >= 0 && x < this.rows && y >= 0 && y < this.cols ){
     return this.board[x][y];
   }
 }
@@ -87,14 +82,30 @@ Board.prototype.floodFill = function(mapData, x, y, oldVal, newVal){
   }
 }
 
+Board.prototype.proceed = function(){
+  var total = parseInt(this.bombs);
+  for(var i = 0; i < this.rows; i++){
+    for(var j = 0; j < this.cols; j++){
+      var cell = this.isValidCell(i,j);
+      total += cell.revealed;
+    }
+  }
+
+  if (total === this.rows * this.cols){
+    Game.win(true);
+  }
+}
+
 Board.prototype.openCells = function(x,y){
   this.stack = [];
-  if (this.getCell(x,y).neighborsWithMines == 0){
+  var cell = this.isValidCell(x,y);
+
+  if (cell.neighborsWithMines == 0){
     this.floodFill(this.board,x,y,null,-1);
   }
 
-  if (this.getCell(x,y).neighborsWithMines > 0){
-    this.getCell(x,y).revealed = 1;
+  if (cell.neighborsWithMines > 0){
+    cell.revealed = 1;
   }
 
   for(var i = 0; i < this.stack.length; i++){
@@ -103,6 +114,8 @@ Board.prototype.openCells = function(x,y){
       cell.neighbors[j].revealed = 1;
     }
   }
+
+  this.proceed();
 }
 
 Board.prototype.drawMap = function (mapData){
@@ -126,7 +139,7 @@ Board.prototype.drawMap = function (mapData){
       }
     }
     if (cell.revealed == 1 && cell.mine == 0){
-      $("div").find("[row="+x+"]"+"[col="+y+"]").addClass('open');
+      $("div.cell"+"[row="+x+"]"+"[col="+y+"]").addClass('open');
     }
   });
 }

@@ -56,6 +56,4 @@ Cell.prototype.setNeighbors = function(board){
   if (neighbor){
     this.addNeighbor(neighbor);
   }
-
 }
-
